@@ -34,7 +34,7 @@ I can probably help set up Carthage or Swift Package Manager support if you need
 
 Things that would make this codebase nicer:
 
-- [ ] Add decodable serializer ("`DecodableEventSourceSerializer`/`DecodableEventSourceMessage`")
+- [ ] Add decodable serializer (`DecodableEventSourceSerializer`/`DecodableEventSourceMessage`)
 - [ ] Add support for Combine publishers
 
 ## Reference
