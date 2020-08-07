@@ -25,7 +25,7 @@ let request = session.eventSourceRequest(endpoint, lastEventID: "0").responseEve
 Ursus can be installed using Cocoapods by adding the following line to your podfile:
 
 ```ruby
-`pod 'AlamofireEventSource', '~> 0.1.0'`
+`pod 'AlamofireEventSource', '~> 1.0.0'`
 ```
 
 I can probably help set up Carthage or Swift Package Manager support if you need it.
