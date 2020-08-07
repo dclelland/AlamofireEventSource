@@ -1,8 +1,8 @@
 # AlamofireEventSource
 
-Alamofire plugin for Server-Sent Events (SSE)
+Alamofire plugin for Server-Sent Events (SSE).
 
-Cocoapods: `pod 'AlamofireEventSource', '~> 0.1.0'`
+## Usage
 
 ```swift
 import Alamofire
@@ -19,3 +19,25 @@ let request = session.eventSourceRequest(endpoint, lastEventID: "0").responseEve
     }
 }
 ```
+
+## Installation
+
+Ursus can be installed using Cocoapods by adding the following line to your podfile:
+
+```ruby
+`pod 'AlamofireEventSource', '~> 0.1.0'`
+```
+
+I can probably help set up Carthage or Swift Package Manager support if you need it.
+
+## Todo list
+
+Things that would make this codebase nicer:
+
+- [ ] Add decodable serializer ("`DecodableEventSourceSerializer`/`DecodableEventSourceMessage`")
+- [ ] Add support for Combine publishers
+
+## Reference
+
+- https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
+- https://developer.mozilla.org/en-US/docs/Web/API/EventSource
