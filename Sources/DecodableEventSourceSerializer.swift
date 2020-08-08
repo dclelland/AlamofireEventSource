@@ -21,14 +21,13 @@ public class DecodableEventSourceSerializer<T: Decodable>: DataStreamSerializer 
     
     public func serialize(_ data: Data) throws -> [DecodableEventSourceMessage<T>] {
         return try serializer.serialize(data).map { message in
-            return DecodableEventSourceMessage(
+            return try DecodableEventSourceMessage(
                 event: message.event,
                 id: message.id,
-                data: message.data,
-                retry: message.retry,
-                result: message.data?.data(using: .utf8).flatMap { data in
-                    return Result(catching: { try decoder.decode(T.self, from: data) })
-                }
+                data: message.data?.data(using: .utf8).flatMap { data in
+                    return try decoder.decode(T.self, from: data)
+                },
+                retry: message.retry
             )
         }
     }
