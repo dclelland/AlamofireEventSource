@@ -9,8 +9,7 @@ import Alamofire
 import AlamofireEventSource
 
 let endpoint = URL(string: "http://localhost/sse")!
-let session = Session.default
-let request = session.eventSourceRequest(endpoint, lastEventID: "0").responseEventSource { eventSource in
+let request = Session.default.eventSourceRequest(endpoint, lastEventID: "0").responseEventSource { eventSource in
     switch eventSource.event {
     case .message(let message):
         print("Event source received message:", message)
@@ -34,7 +33,6 @@ I can probably help set up Carthage or Swift Package Manager support if you need
 
 Things that would make this codebase nicer:
 
-- [ ] Add decodable serializer ("`DecodableEventSourceSerializer`/`DecodableEventSourceMessage`")
 - [ ] Add support for Combine publishers
 
 ## Reference

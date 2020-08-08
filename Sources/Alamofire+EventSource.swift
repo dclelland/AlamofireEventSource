@@ -45,7 +45,7 @@ extension DataStreamRequest {
         
     }
 
-    @discardableResult public func responseEventSource(using serializer: EventSourceSerializer = .default, on queue: DispatchQueue = .main, handler: @escaping (EventSource) -> Void) -> DataStreamRequest {
+    @discardableResult public func responseEventSource(using serializer: EventSourceSerializer = EventSourceSerializer(), on queue: DispatchQueue = .main, handler: @escaping (EventSource) -> Void) -> DataStreamRequest {
         return responseStream(using: serializer, on: queue) { stream in
             switch stream.event {
             case .stream(let result):
@@ -58,4 +58,41 @@ extension DataStreamRequest {
         }
     }
 
+}
+
+extension DataStreamRequest {
+    
+    public struct DecodableEventSource<T: Decodable> {
+        
+        public let event: DecodableEventSourceEvent<T>
+        
+        public let token: CancellationToken
+
+        public func cancel() {
+            token.cancel()
+        }
+        
+    }
+    
+    public enum DecodableEventSourceEvent<T: Decodable> {
+        
+        case message(DecodableEventSourceMessage<T>)
+        
+        case complete(Completion)
+        
+    }
+
+    @discardableResult public func responseDecodableEventSource<T: Decodable>(using serializer: DecodableEventSourceSerializer<T> = DecodableEventSourceSerializer(), on queue: DispatchQueue = .main, handler: @escaping (DecodableEventSource<T>) -> Void) -> DataStreamRequest {
+        return responseStream(using: serializer, on: queue) { stream in
+            switch stream.event {
+            case .stream(let result):
+                for message in try result.get() {
+                    handler(DecodableEventSource(event: .message(message), token: stream.token))
+                }
+            case .complete(let completion):
+                handler(DecodableEventSource(event: .complete(completion), token: stream.token))
+            }
+        }
+    }
+    
 }

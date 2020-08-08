@@ -10,13 +10,13 @@ import Alamofire
 
 public class EventSourceSerializer: DataStreamSerializer {
     
-    public static let `default` = EventSourceSerializer(delimiter: "\n\n".data(using: .utf8)!)
+    public static let doubleNewlineDelimiter = "\n\n".data(using: .utf8)!
     
     public let delimiter: Data
     
-    public var buffer = Data()
+    private var buffer = Data()
     
-    public init(delimiter: Data) {
+    public init(delimiter: Data = doubleNewlineDelimiter) {
         self.delimiter = delimiter
     }
     
