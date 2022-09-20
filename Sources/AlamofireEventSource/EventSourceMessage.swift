@@ -8,12 +8,10 @@
 import Foundation
 
 public struct EventSourceMessage {
-    
     public var event: String?
     public var id: String?
     public var data: String?
     public var retry: String?
-    
 }
 
 extension EventSourceMessage {
@@ -33,7 +31,6 @@ extension EventSourceMessage {
             }
         }
     }
-    
 }
 
 extension EventSourceMessage {
@@ -41,7 +38,6 @@ extension EventSourceMessage {
     internal struct Field {
         
         internal enum Key: String {
-            
             case event
             case id
             case data
@@ -54,21 +50,15 @@ extension EventSourceMessage {
         
         internal init?(parsing string: String) {
             let scanner = Scanner(string: string)
-            
             guard let key = scanner.scanUpToString(":").flatMap(Key.init(rawValue:)) else {
                 return nil
             }
-            
             _ = scanner.scanString(":")
-            
             guard let value = scanner.scanUpToString("\n") else {
                 return nil
             }
-            
             self.key = key
             self.value = value
         }
-        
     }
-    
 }

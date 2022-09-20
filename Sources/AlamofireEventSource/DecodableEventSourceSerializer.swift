@@ -31,5 +31,4 @@ public class DecodableEventSourceSerializer<T: Decodable>: DataStreamSerializer 
             )
         }
     }
-    
 }

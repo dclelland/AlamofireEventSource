@@ -20,29 +20,21 @@ extension Session {
             }
         }
     }
-    
 }
 
 extension DataStreamRequest {
     
     public struct EventSource {
-        
         public let event: EventSourceEvent
-        
         public let token: CancellationToken
-
         public func cancel() {
             token.cancel()
         }
-        
     }
     
     public enum EventSourceEvent {
-        
         case message(EventSourceMessage)
-        
         case complete(Completion)
-        
     }
 
     @discardableResult public func responseEventSource(using serializer: EventSourceSerializer = EventSourceSerializer(), on queue: DispatchQueue = .main, handler: @escaping (EventSource) -> Void) -> DataStreamRequest {
@@ -57,29 +49,21 @@ extension DataStreamRequest {
             }
         }
     }
-
 }
 
 extension DataStreamRequest {
     
     public struct DecodableEventSource<T: Decodable> {
-        
         public let event: DecodableEventSourceEvent<T>
-        
         public let token: CancellationToken
-
         public func cancel() {
             token.cancel()
         }
-        
     }
     
     public enum DecodableEventSourceEvent<T: Decodable> {
-        
         case message(DecodableEventSourceMessage<T>)
-        
         case complete(Completion)
-        
     }
 
     @discardableResult public func responseDecodableEventSource<T: Decodable>(using serializer: DecodableEventSourceSerializer<T> = DecodableEventSourceSerializer(), on queue: DispatchQueue = .main, handler: @escaping (DecodableEventSource<T>) -> Void) -> DataStreamRequest {
@@ -94,5 +78,4 @@ extension DataStreamRequest {
             }
         }
     }
-    
 }

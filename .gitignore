@@ -1,6 +1,9 @@
-/*/build
-xcuserdata
-.xcodeproj/ !*.xcodeproj/project.pbxproj
 .DS_Store
-Pods
-*.xcworkspace
+/.build
+/Packages
+/*.xcodeproj
+xcuserdata/
+DerivedData/
+.swiftpm/config/registries.json
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+.netrc
